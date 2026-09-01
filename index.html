@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adtomate Solutions — AI, Agents & Full-Stack Engineering</title>
+  <meta name="description" content="Adtomate Solutions Pvt. Ltd. is a technology and AI consulting company building intelligent products, AI agents, MCP servers, scalable software systems, and next-generation digital solutions." />
+  <meta name="theme-color" content="#0A0B0D" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Adtomate Solutions — Built for the AI Era" />
+  <meta property="og:description" content="We help businesses adopt and build with AI, Machine Learning, Generative AI, AI Agents, MCP, cloud technologies, automation, and modern full-stack engineering." />
+
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <meta property="og:image" content="assets/adtomate-logo.png" />
+
+  <!-- Fonts: geometric display (Sora) + body (Manrope) + technical mono (JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <!-- Atmospheric background layers -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-aurora aurora-1"></div>
+    <div class="bg-aurora aurora-2"></div>
+    <div class="bg-noise"></div>
+  </div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a class="brand" href="#home" aria-label="Adtomate Solutions home">
+        <img class="brand__mark" src="assets/adtomate-mark.png" width="34" height="34" alt="" decoding="async" />
+        <span class="brand__name">Adtomate<span class="brand__dot">.</span></span>
+      </a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#products">Products</a>
+        <a href="#stack">Tech Stack</a>
+        <a href="#approach">Approach</a>
+        <a href="#why">Why Us</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm" href="#contact">Contact</a>
+        <a class="btn btn--primary btn--sm" href="#contact">Start a project</a>
+      </div>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="#services">Services</a>
+      <a href="#products">Products</a>
+      <a href="#stack">Tech Stack</a>
+      <a href="#approach">Approach</a>
+      <a href="#why">Why Us</a>
+      <a class="btn btn--primary" href="#contact">Start a project</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow reveal">
+            <span class="eyebrow__pulse"></span>
+            AI/ML · Full-Stack · Intelligent Systems · Consulting
+          </p>
+          <h1 class="hero__title reveal" data-delay="1">
+            Intelligent products.<br>
+            Autonomous systems.<br>
+            <span class="grad">Built for the AI era.</span>
+          </h1>
+          <p class="hero__lead reveal" data-delay="2">
+            <strong>Adtomate Solutions Pvt. Ltd.</strong> is a technology and AI consulting
+            company focused on building intelligent products, scalable software systems,
+            and next-generation digital solutions.
+          </p>
+          <div class="hero__cta reveal" data-delay="3">
+            <a class="btn btn--primary btn--lg" href="#contact">
+              Start a project
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#products">Explore products</a>
+          </div>
+          <ul class="hero__chips reveal" data-delay="4">
+            <li>Generative AI</li>
+            <li>AI Agents</li>
+            <li>MCP Servers</li>
+            <li>RAG</li>
+            <li>LLMs</li>
+            <li>Full-Stack</li>
+          </ul>
+        </div>
+
+        <!-- Animated agent-orchestration panel -->
+        <div class="hero__visual reveal" data-delay="3" aria-hidden="true">
+          <div class="orchestrator">
+            <div class="orchestrator__bar">
+              <span class="dot dot--live"></span>
+              <span class="orchestrator__title">agent · orchestration</span>
+              <span class="orchestrator__status">running</span>
+            </div>
+            <svg class="graph" viewBox="0 0 320 260" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.7"/>
+                </linearGradient>
+              </defs>
+              <!-- edges -->
+              <g class="edges">
+                <path class="edge" d="M160 40 L70 120"/>
+                <path class="edge" d="M160 40 L250 120"/>
+                <path class="edge" d="M70 120 L160 200"/>
+                <path class="edge" d="M250 120 L160 200"/>
+                <path class="edge" d="M70 120 L250 120"/>
+                <path class="edge" d="M160 40 L160 200"/>
+              </g>
+              <!-- nodes -->
+              <g class="nodes">
+                <g class="node node--root" style="--n:0">
+                  <circle cx="160" cy="40" r="16"/>
+                  <text x="160" y="44">LLM</text>
+                </g>
+                <g class="node" style="--n:1">
+                  <circle cx="70" cy="120" r="13"/>
+                  <text x="70" y="124">RAG</text>
+                </g>
+                <g class="node" style="--n:2">
+                  <circle cx="250" cy="120" r="13"/>
+                  <text x="250" y="124">MCP</text>
+                </g>
+                <g class="node node--leaf" style="--n:3">
+                  <circle cx="160" cy="200" r="14"/>
+                  <text x="160" y="204">API</text>
+                </g>
+              </g>
+            </svg>
+            <div class="orchestrator__log">
+              <span class="mono">→ tool_call</span>
+              <span class="mono">mcp.query()</span>
+              <span class="mono accent">200 OK</span>
+            </div>
+          </div>
+          <div class="hero__badge">
+            <span class="mono">99.9%</span>
+            <small>production uptime target</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MARQUEE ===================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Generative AI</span><span class="sep">/</span>
+        <span>AI Agents</span><span class="sep">/</span>
+        <span>Agentic AI</span><span class="sep">/</span>
+        <span>MCP Servers</span><span class="sep">/</span>
+        <span>RAG</span><span class="sep">/</span>
+        <span>LLMs</span><span class="sep">/</span>
+        <span>NLP</span><span class="sep">/</span>
+        <span>Computer Vision</span><span class="sep">/</span>
+        <span>Vector Databases</span><span class="sep">/</span>
+        <span>Cloud-Native</span><span class="sep">/</span>
+        <span>Microservices</span><span class="sep">/</span>
+        <span>Automation</span><span class="sep">/</span>
+        <!-- duplicate for seamless loop -->
+        <span>Generative AI</span><span class="sep">/</span>
+        <span>AI Agents</span><span class="sep">/</span>
+        <span>Agentic AI</span><span class="sep">/</span>
+        <span>MCP Servers</span><span class="sep">/</span>
+        <span>RAG</span><span class="sep">/</span>
+        <span>LLMs</span><span class="sep">/</span>
+        <span>NLP</span><span class="sep">/</span>
+        <span>Computer Vision</span><span class="sep">/</span>
+        <span>Vector Databases</span><span class="sep">/</span>
+        <span>Cloud-Native</span><span class="sep">/</span>
+        <span>Microservices</span><span class="sep">/</span>
+        <span>Automation</span><span class="sep">/</span>
+      </div>
+    </div>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow"><span class="eyebrow__pulse"></span>What We Do</p>
+          <h2 class="section__title">Engineering across the full <span class="grad">AI &amp; software</span> stack</h2>
+          <p class="section__sub">
+            We help businesses adopt and build with Artificial Intelligence, Machine Learning,
+            Generative AI, AI Agents, MCP, cloud technologies, automation, and modern full-stack engineering.
+          </p>
+        </header>
+
+        <div class="cards">
+          <article class="card reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0 0 8v1a5 5 0 0 0 10 0v-1a4 4 0 0 0 0-8V7a5 5 0 0 0-5-5Z" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v8M8.5 10.5h7M8.5 13.5h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="card__num mono">01</span>
+            </div>
+            <h3 class="card__title">Artificial Intelligence &amp; Machine Learning</h3>
+            <ul class="card__list">
+              <li>AI/ML consulting &amp; implementation</li>
+              <li>Generative AI solutions</li>
+              <li>Large Language Models (LLMs)</li>
+              <li>AI agents &amp; autonomous workflows</li>
+              <li>RAG-based applications</li>
+              <li>Natural Language Processing</li>
+              <li>Computer vision solutions</li>
+              <li>AI-powered automation</li>
+              <li>Intelligent decision-making systems</li>
+              <li>Model integration &amp; deployment</li>
+            </ul>
+          </article>
+
+          <article class="card card--feature reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="6" r="2.4" stroke="currentColor" stroke-width="1.5"/><circle cx="5" cy="18" r="2.4" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="18" r="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M12 8.4 6.5 15.8M12 8.4l5.5 7.4M7.4 18h9.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              </span>
+              <span class="card__num mono">02</span>
+            </div>
+            <h3 class="card__title">Agentic AI &amp; MCP</h3>
+            <ul class="card__list">
+              <li>AI agent development</li>
+              <li>Multi-agent systems</li>
+              <li>Model Context Protocol (MCP) servers</li>
+              <li>MCP tools &amp; integrations</li>
+              <li>AI agent tool-calling systems</li>
+              <li>Agent-to-API integrations</li>
+              <li>Custom AI workflows</li>
+              <li>AI-powered enterprise assistants</li>
+              <li>Autonomous business workflows</li>
+              <li>Context-aware AI applications</li>
+            </ul>
+            <span class="card__tag mono">core focus</span>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="card__num mono">03</span>
+            </div>
+            <h3 class="card__title">Full-Stack Development</h3>
+            <ul class="card__list">
+              <li>Modern web applications</li>
+              <li>Mobile applications</li>
+              <li>SaaS platforms</li>
+              <li>Enterprise applications</li>
+              <li>REST &amp; GraphQL APIs</li>
+              <li>Backend architecture</li>
+              <li>Database design</li>
+              <li>Real-time applications</li>
+              <li>Multi-tenant systems</li>
+              <li>Microservices &amp; distributed systems</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M7 17a4 4 0 0 1-1-7.87A5 5 0 0 1 16 8a4 4 0 0 1 1 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 12v7m0-7-2.5 2.5M12 12l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="card__num mono">04</span>
+            </div>
+            <h3 class="card__title">Cloud, DevOps &amp; Infrastructure</h3>
+            <ul class="card__list">
+              <li>Cloud-native application development</li>
+              <li>CI/CD pipelines</li>
+              <li>Containerization</li>
+              <li>Docker &amp; Kubernetes</li>
+              <li>Infrastructure automation</li>
+              <li>Monitoring &amp; observability</li>
+              <li>Logging &amp; analytics</li>
+              <li>Production deployment</li>
+              <li>Scalable cloud architectures</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M10 3 4 14h6l-1 7 7-11h-6l1-7Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="card__num mono">05</span>
+            </div>
+            <h3 class="card__title">Automation &amp; Integrations</h3>
+            <ul class="card__list">
+              <li>Business process automation</li>
+              <li>AI-powered workflows</li>
+              <li>Third-party API integrations</li>
+              <li>WhatsApp &amp; communication automation</li>
+              <li>Marketing automation</li>
+              <li>CRM integrations</li>
+              <li>Data pipelines</li>
+              <li>Intelligent workflow orchestration</li>
+            </ul>
+          </article>
+
+          <article class="card card--cta reveal">
+            <h3 class="card__title">Have something else in mind?</h3>
+            <p>From a single AI agent to a complete enterprise platform — if it runs on modern technology, we can architect and build it.</p>
+            <a class="btn btn--primary" href="#contact">
+              Talk to our team
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TECH STACK ===================== -->
+    <section class="section section--alt" id="stack">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow"><span class="eyebrow__pulse"></span>Modern Technology Stack</p>
+          <h2 class="section__title">Tools across the <span class="grad">AI &amp; software ecosystem</span></h2>
+          <p class="section__sub">We work with modern technologies spanning intelligence, engineering, data, and infrastructure.</p>
+        </header>
+
+        <div class="stack">
+          <div class="stack__group reveal">
+            <h3 class="stack__label"><span class="mono">01</span> AI &amp; ML</h3>
+            <div class="tags">
+              <span>LLMs</span><span>Generative AI</span><span>RAG</span><span>AI Agents</span>
+              <span>Agentic AI</span><span>NLP</span><span>Computer Vision</span><span>Machine Learning</span>
+            </div>
+          </div>
+          <div class="stack__group reveal">
+            <h3 class="stack__label"><span class="mono">02</span> AI Infrastructure</h3>
+            <div class="tags">
+              <span>MCP</span><span>MCP Servers</span><span>Vector Databases</span><span>Embeddings</span>
+              <span>Model APIs</span><span>AI Tool Calling</span><span>AI Orchestration</span>
+            </div>
+          </div>
+          <div class="stack__group reveal">
+            <h3 class="stack__label"><span class="mono">03</span> Development</h3>
+            <div class="tags">
+              <span>React</span><span>Next.js</span><span>React Native</span><span>Node.js</span>
+              <span>Python</span><span>TypeScript</span><span>Java</span><span>REST</span><span>GraphQL</span>
+            </div>
+          </div>
+          <div class="stack__group reveal">
+            <h3 class="stack__label"><span class="mono">04</span> Databases &amp; Data</h3>
+            <div class="tags">
+              <span>PostgreSQL</span><span>MySQL</span><span>MongoDB</span><span>Redis</span>
+              <span>Vector Databases</span><span>Data Pipelines</span>
+            </div>
+          </div>
+          <div class="stack__group reveal">
+            <h3 class="stack__label"><span class="mono">05</span> Cloud &amp; DevOps</h3>
+            <div class="tags">
+              <span>Docker</span><span>Kubernetes</span><span>CI/CD</span>
+              <span>Cloud Infrastructure</span><span>Monitoring</span><span>Observability</span>
+            </div>
+          </div>
+          <div class="stack__group reveal">
+            <h3 class="stack__label"><span class="mono">06</span> Architecture</h3>
+            <div class="tags">
+              <span>Microservices</span><span>Serverless</span><span>Event-Driven</span>
+              <span>Multi-Tenant Systems</span><span>Distributed Systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PRODUCTS ===================== -->
+    <section class="section" id="products">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow"><span class="eyebrow__pulse"></span>Our Products</p>
+          <h2 class="section__title">Platforms we build <span class="grad">&amp; ship ourselves</span></h2>
+          <p class="section__sub">Our experience comes not only from consulting, but from building and running our own products in production.</p>
+        </header>
+
+        <div class="products">
+          <!-- Flagship -->
+          <article class="product product--flagship reveal">
+            <div class="product__glow" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__head">
+                <h3 class="product__name">Sociovia</h3>
+                <span class="product__pill mono">Flagship</span>
+              </div>
+              <p class="product__desc">
+                An AI-powered marketing platform that connects Meta &amp; Google Ads, WhatsApp
+                automation, lead intelligence, and analytics in one place. Plan, launch, manage,
+                and measure marketing campaigns through a single unified platform.
+              </p>
+              <ul class="product__feats">
+                <li>Meta &amp; Google Ads</li>
+                <li>WhatsApp automation</li>
+                <li>Lead intelligence</li>
+                <li>Unified analytics</li>
+              </ul>
+              <div class="product__foot">
+                <a class="btn btn--primary btn--sm" href="https://sociovia.com" target="_blank" rel="noopener">
+                  Visit Sociovia.com
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="product__by">A product of Adtomate Solutions Pvt. Ltd.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="product reveal">
+            <span class="product__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.2A8 8 0 1 1 21 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 11h6M9 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </span>
+            <h3 class="product__name">Sociovia Chat</h3>
+            <p class="product__desc">An AI-powered conversational solution for intelligent customer communication, automated interactions, and AI-driven workflows.</p>
+          </article>
+
+          <article class="product reveal">
+            <span class="product__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M16 20v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9.5" cy="8" r="3.2" stroke="currentColor" stroke-width="1.5"/><path d="M17 4.2a3.2 3.2 0 0 1 0 6.2M21 20v-1a4 4 0 0 0-3-3.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </span>
+            <h3 class="product__name">Sociovia Engage</h3>
+            <p class="product__desc">A business engagement solution focused on customer &amp; lead interactions, communication automation, and intelligent engagement.</p>
+          </article>
+
+          <article class="product reveal">
+            <span class="product__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19h16M8 16v-4M12 16V8M16 16v-6M20 16v-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 class="product__name">SocioOptimizer</h3>
+            <p class="product__desc">An optimization-focused solution designed to improve workflows, operational efficiency, and data-driven decision-making.</p>
+          </article>
+
+          <article class="product product--more reveal">
+            <span class="product__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+            <h3 class="product__name">More in Development</h3>
+            <p class="product__desc">We continuously explore and develop new products around AI agents, MCP, automation, intelligent systems, full-stack applications, and emerging technologies.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHY ===================== -->
+    <section class="section section--alt" id="why">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow"><span class="eyebrow__pulse"></span>Why Adtomate</p>
+          <h2 class="section__title">Not AI bolted on. <span class="grad">AI built in.</span></h2>
+        </header>
+
+        <div class="why">
+          <article class="why__item reveal">
+            <span class="why__num mono">01</span>
+            <h3>Built for the AI Era</h3>
+            <p>We don't just integrate AI into existing software. We build systems where AI is a fundamental part of the product and the workflow.</p>
+          </article>
+          <article class="why__item reveal">
+            <span class="why__num mono">02</span>
+            <h3>From Idea to Production</h3>
+            <p>We handle the complete technology lifecycle — architecture, development, AI integration, deployment, monitoring, and optimization.</p>
+          </article>
+          <article class="why__item reveal">
+            <span class="why__num mono">03</span>
+            <h3>Modern Technology</h3>
+            <p>We continuously work with emerging technologies such as Agentic AI, MCP, LLMs, RAG, AI automation, cloud-native architectures, and modern frameworks.</p>
+          </article>
+          <article class="why__item reveal">
+            <span class="why__num mono">04</span>
+            <h3>Product Engineering Experience</h3>
+            <p>Our experience comes not only from consulting but from building our own products and platforms — so we understand real-world production systems.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== APPROACH ===================== -->
+    <section class="section" id="approach">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow"><span class="eyebrow__pulse"></span>Our Approach</p>
+          <h2 class="section__title">A clear path from <span class="grad">idea to scale</span></h2>
+          <p class="section__sub">We work closely with businesses to build technology solutions that are practical, scalable, secure, and ready for the future.</p>
+        </header>
+
+        <ol class="approach reveal">
+          <li class="approach__step"><span class="approach__i mono">01</span><span class="approach__name">Discover</span></li>
+          <li class="approach__step"><span class="approach__i mono">02</span><span class="approach__name">Architect</span></li>
+          <li class="approach__step"><span class="approach__i mono">03</span><span class="approach__name">Build</span></li>
+          <li class="approach__step approach__step--accent"><span class="approach__i mono">04</span><span class="approach__name">Integrate AI</span></li>
+          <li class="approach__step"><span class="approach__i mono">05</span><span class="approach__name">Deploy</span></li>
+          <li class="approach__step"><span class="approach__i mono">06</span><span class="approach__name">Scale</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== CTA + CONTACT ===================== -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="cta reveal">
+          <div class="cta__glow" aria-hidden="true"></div>
+          <p class="eyebrow"><span class="eyebrow__pulse"></span>Let's build together</p>
+          <h2 class="cta__title">Let's build the future of <span class="grad">software.</span></h2>
+          <p class="cta__sub">
+            Whether you need an AI-powered application, MCP server, AI agent, full-stack platform,
+            mobile app, automation system, or complete enterprise solution — Adtomate Solutions can
+            turn your idea into a production-ready technology solution.
+          </p>
+        </div>
+
+        <div class="contact__grid">
+          <!-- Details -->
+          <div class="contact__info reveal">
+            <img class="contact__logo" src="assets/adtomate-logo-trans.png" alt="Adtomate Solutions — AI/ML, Full-Stack Development, Intelligent Solutions" width="360" height="286" loading="lazy" decoding="async" />
+            <h3 class="contact__co">Adtomate Solutions Private Limited</h3>
+
+            <a class="contact__row" href="https://maps.google.com/?q=71+Hari+Nagar+Ashram+South+Delhi+New+Delhi+110014" target="_blank" rel="noopener">
+              <span class="contact__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+              <span>
+                <small>Address</small>
+                71 S/F R/S F/P, Hari Nagar Ashram,<br>South Delhi, New Delhi – 110014, India
+              </span>
+            </a>
+
+            <a class="contact__row" href="tel:+919667796730">
+              <span class="contact__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 5c0-.6.4-1 1-1h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 .6-.4 1-1 1A16 16 0 0 1 4 5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </span>
+              <span>
+                <small>Phone</small>
+                +91 96677 96730
+              </span>
+            </a>
+
+            <a class="contact__row" href="mailto:contact@sociovia.com">
+              <span class="contact__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span>
+                <small>Email</small>
+                contact@sociovia.com
+              </span>
+            </a>
+
+            <a class="contact__row" href="https://sociovia.com" target="_blank" rel="noopener">
+              <span class="contact__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3C9.5 5.7 9.5 18.3 12 21" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span>
+                <small>Product</small>
+                Sociovia.com
+              </span>
+            </a>
+          </div>
+
+          <!-- Form (composes a mailto, works with no backend) -->
+          <form class="contact__form reveal" id="contactForm" novalidate>
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" autocomplete="name" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" autocomplete="email" placeholder="you@company.com" required />
+            </div>
+            <div class="field">
+              <label for="cf-topic">What can we help with?</label>
+              <select id="cf-topic" name="topic">
+                <option>AI / ML solution</option>
+                <option>AI agents &amp; MCP</option>
+                <option>Full-stack application</option>
+                <option>Cloud, DevOps &amp; infrastructure</option>
+                <option>Automation &amp; integrations</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-msg">Message</label>
+              <textarea id="cf-msg" name="message" rows="4" placeholder="Tell us about your project…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg">
+              Send message
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="contact__note" id="formNote" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a class="brand brand--light" href="#home" aria-label="Adtomate Solutions home">
+          <img class="brand__mark" src="assets/adtomate-mark-light.png" width="32" height="32" alt="" decoding="async" />
+          <span class="brand__name">Adtomate<span class="brand__dot">.</span></span>
+        </a>
+        <p class="footer__tag">Technology &amp; AI consulting — building intelligent products, scalable systems, and next-generation digital solutions.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Footer">
+        <div>
+          <h4>Company</h4>
+          <a href="#services">Services</a>
+          <a href="#why">Why Adtomate</a>
+          <a href="#approach">Approach</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div>
+          <h4>Products</h4>
+          <a href="https://sociovia.com" target="_blank" rel="noopener">Sociovia</a>
+          <a href="#products">Sociovia Chat</a>
+          <a href="#products">Sociovia Engage</a>
+          <a href="#products">SocioOptimizer</a>
+        </div>
+        <div>
+          <h4>Reach us</h4>
+          <a href="mailto:contact@sociovia.com">contact@sociovia.com</a>
+          <a href="tel:+919667796730">+91 96677 96730</a>
+          <span class="footer__addr">New Delhi – 110014, India</span>
+        </div>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <span>© <span id="year">2026</span> Adtomate Solutions Pvt. Ltd. All rights reserved.</span>
+      <span class="mono footer__sig">Built for the AI era.</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
