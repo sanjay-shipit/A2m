@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# firebase
+.firebase/
+firebase-debug.log*
+firebase-debug.*.log*
+.runtimeconfig.json
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

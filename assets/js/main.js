@@ -59,6 +59,41 @@
     reveals.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- Count-up metrics ---------- */
+  var counters = Array.prototype.slice.call(doc.querySelectorAll('.metric__val[data-count]'));
+  function fmt(el, val) {
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var pre = el.getAttribute('data-prefix') || '';
+    var suf = el.getAttribute('data-suffix') || '';
+    return pre + val.toFixed(dec) + suf;
+  }
+  function runCount(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(target)) return;
+    if (reduce) { el.textContent = fmt(el, target); return; }
+    var dur = 1500, start = null;
+    (function step(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(el, target * eased);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = fmt(el, target);
+    })(performance.now ? performance.now() : Date.now());
+  }
+  if (counters.length) {
+    if (reduce || !('IntersectionObserver' in window)) {
+      counters.forEach(function (el) { el.textContent = fmt(el, parseFloat(el.getAttribute('data-count'))); });
+    } else {
+      var cio = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { runCount(entry.target); obs.unobserve(entry.target); }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(function (el) { cio.observe(el); });
+    }
+  }
+
   /* ---------- Active nav link on scroll ---------- */
   var navLinks = Array.prototype.slice.call(doc.querySelectorAll('.nav__links a[href^="#"]'));
   var sections = navLinks

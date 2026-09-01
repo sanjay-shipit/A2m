@@ -1,0 +1,58 @@
+name: Deploy to Firebase Hosting
+
+# Live deploys on merge to the default branch; every PR gets a temporary
+# preview channel with a shareable URL posted back to the PR.
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+# Least-privilege token; pull-requests: write lets the action comment the
+# preview URL on the PR.
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: firebase-hosting-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ---- PR preview channel -------------------------------------------------
+  preview:
+    name: Preview channel
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML links exist
+        run: |
+          test -f index.html || { echo "index.html missing"; exit 1; }
+          test -f 404.html   || { echo "404.html missing";   exit 1; }
+          echo "Static site OK — no build step required."
+
+      - name: Deploy to preview channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ vars.FIREBASE_PROJECT_ID || 'adtomate-solutions' }}
+          expires: 7d
+
+  # ---- Live deploy on merge ----------------------------------------------
+  live:
+    name: Live deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to live channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ vars.FIREBASE_PROJECT_ID || 'adtomate-solutions' }}
+          channelId: live

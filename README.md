@@ -45,6 +45,42 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
+## Deployment — Firebase Hosting (CI/CD)
+
+Deploys are automated with GitHub Actions (`.github/workflows/firebase-hosting.yml`):
+
+| Event | Action |
+| --- | --- |
+| Pull request | Deploys to a temporary **preview channel**; the preview URL is posted on the PR (expires in 7 days). |
+| Merge to `main` | Deploys to the **live channel** (production). |
+
+Hosting config lives in `firebase.json` (long-cache immutable assets, no-cache HTML,
+clean URLs, security headers, and `404.html` as the not-found page).
+
+### One-time setup
+
+1. Create a Firebase project and enable Hosting, then set the project id:
+   - edit `.firebaserc` → replace `adtomate-solutions` with your project id, **and/or**
+   - add a repo **variable** `FIREBASE_PROJECT_ID` (Settings → Secrets and variables → Actions → Variables).
+2. Generate the deploy credentials (creates the secret automatically):
+   ```bash
+   npm i -g firebase-tools
+   firebase login
+   firebase init hosting:github   # links this repo, adds FIREBASE_SERVICE_ACCOUNT secret
+   ```
+   Or add the secret manually: **FIREBASE_SERVICE_ACCOUNT** = the JSON key of a service
+   account with the *Firebase Hosting Admin* role.
+3. Push a PR to get a preview URL; merge to `main` to go live.
+
+### Manual deploy (optional)
+
+```bash
+firebase deploy --only hosting
+```
+
+> **Note:** the benchmark figures on the site (ROAS, cost-per-lead, response times, etc.)
+> are illustrative placeholders — replace them with your real audited numbers before launch.
+
 ## Contact
 
 **Adtomate Solutions Private Limited**
