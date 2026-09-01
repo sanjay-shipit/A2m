@@ -7,6 +7,7 @@ on:
   push:
     branches: ['**']
   pull_request:
+  workflow_dispatch: {}   # lets you deploy on demand from the Actions tab
 
 # Least-privilege token; pull-requests: write lets the action comment the
 # preview URL on the PR.
@@ -45,7 +46,7 @@ jobs:
   # ---- Live deploy on push to the default branch --------------------------
   live:
     name: Live deploy
-    if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
