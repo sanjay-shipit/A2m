@@ -45,38 +45,28 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
-## Deployment — Firebase Hosting (CI/CD)
+## Deployment — Firebase Hosting (CI/CD, phone-only)
 
-Deploys are automated with GitHub Actions (`.github/workflows/firebase-hosting.yml`):
+No laptop or terminal required. GitHub Actions (`.github/workflows/firebase-hosting.yml`)
+does every deploy:
 
 | Event | Action |
 | --- | --- |
-| Pull request | Deploys to a temporary **preview channel**; the preview URL is posted on the PR (expires in 7 days). |
-| Merge to `main` | Deploys to the **live channel** (production). |
+| Commit to the **default branch** | Deploys **live** (production) → `https://<project-id>.web.app` |
+| Pull Request | Deploys a temporary **preview** URL, posted as a PR comment (expires 7 days) |
 
-Hosting config lives in `firebase.json` (long-cache immutable assets, no-cache HTML,
-clean URLs, security headers, and `404.html` as the not-found page).
+Hosting config is in `firebase.json` (immutable long-cache assets, no-cache HTML, clean
+URLs, security headers, `404.html`). **Full step-by-step phone guide: [`DEPLOY.md`](DEPLOY.md).**
 
-### One-time setup
+### The 2 things you set once (from your phone, at github.com in a browser)
 
-1. Create a Firebase project and enable Hosting, then set the project id:
-   - edit `.firebaserc` → replace `adtomate-solutions` with your project id, **and/or**
-   - add a repo **variable** `FIREBASE_PROJECT_ID` (Settings → Secrets and variables → Actions → Variables).
-2. Generate the deploy credentials (creates the secret automatically):
-   ```bash
-   npm i -g firebase-tools
-   firebase login
-   firebase init hosting:github   # links this repo, adds FIREBASE_SERVICE_ACCOUNT secret
-   ```
-   Or add the secret manually: **FIREBASE_SERVICE_ACCOUNT** = the JSON key of a service
-   account with the *Firebase Hosting Admin* role.
-3. Push a PR to get a preview URL; merge to `main` to go live.
+Repo → **Settings → Secrets and variables → Actions**:
 
-### Manual deploy (optional)
+1. **Secret** `FIREBASE_SERVICE_ACCOUNT` — the JSON key of a service account with the
+   *Firebase Hosting Admin* role (create it in the Google Cloud console → see `DEPLOY.md`).
+2. **Variable** `FIREBASE_PROJECT_ID` — your Firebase project id.
 
-```bash
-firebase deploy --only hosting
-```
+Then commit anything to the default branch → the **Actions** tab shows the deploy → live.
 
 > **Note:** the benchmark figures on the site (ROAS, cost-per-lead, response times, etc.)
 > are illustrative placeholders — replace them with your real audited numbers before launch.

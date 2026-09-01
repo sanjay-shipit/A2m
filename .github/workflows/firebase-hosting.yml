@@ -1,10 +1,11 @@
 name: Deploy to Firebase Hosting
 
-# Live deploys on merge to the default branch; every PR gets a temporary
-# preview channel with a shareable URL posted back to the PR.
+# Phone-only friendly: no laptop or terminal needed.
+# - Every commit to the DEFAULT branch (whatever it is called) deploys LIVE.
+# - Every Pull Request gets a temporary preview URL posted on the PR.
 on:
   push:
-    branches: [main, master]
+    branches: ['**']
   pull_request:
 
 # Least-privilege token; pull-requests: write lets the action comment the
@@ -27,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate HTML links exist
+      - name: Sanity check
         run: |
           test -f index.html || { echo "index.html missing"; exit 1; }
           test -f 404.html   || { echo "404.html missing";   exit 1; }
@@ -41,10 +42,10 @@ jobs:
           projectId: ${{ vars.FIREBASE_PROJECT_ID || 'adtomate-solutions' }}
           expires: 7d
 
-  # ---- Live deploy on merge ----------------------------------------------
+  # ---- Live deploy on push to the default branch --------------------------
   live:
     name: Live deploy
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
