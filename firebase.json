@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "sociovia-c9473-81765",
     "public": ".",
     "cleanUrls": true,
     "trailingSlash": false,

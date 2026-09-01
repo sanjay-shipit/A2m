@@ -48,23 +48,25 @@ python3 -m http.server 8000
 ## Deployment — Firebase Hosting (CI/CD, phone-only)
 
 No laptop or terminal required. GitHub Actions (`.github/workflows/firebase-hosting.yml`)
-does every deploy:
+deploys to Firebase project **`sociovia-c9473`**, into the Hosting site
+**`sociovia-c9473-81765`** (the one linked to your `adtomate-solutions` web app — separate
+from the project default, so the Sociovia app is never touched):
 
 | Event | Action |
 | --- | --- |
-| Commit to the **default branch** | Deploys **live** (production) → `https://<project-id>.web.app` |
+| Commit to the **default branch** | Deploys **live** → `https://sociovia-c9473-81765.web.app` |
 | Pull Request | Deploys a temporary **preview** URL, posted as a PR comment (expires 7 days) |
 
-Hosting config is in `firebase.json` (immutable long-cache assets, no-cache HTML, clean
-URLs, security headers, `404.html`). **Full step-by-step phone guide: [`DEPLOY.md`](DEPLOY.md).**
+Hosting config is in `firebase.json` (`site: sociovia-c9473-81765`, immutable long-cache
+assets, no-cache HTML, clean URLs, security headers, `404.html`). Google Analytics is wired
+in `assets/js/firebase.js`. **Full step-by-step phone guide: [`DEPLOY.md`](DEPLOY.md).**
 
-### The 2 things you set once (from your phone, at github.com in a browser)
+### One-time setup (from your phone)
 
-Repo → **Settings → Secrets and variables → Actions**:
-
-1. **Secret** `FIREBASE_SERVICE_ACCOUNT` — the JSON key of a service account with the
-   *Firebase Hosting Admin* role (create it in the Google Cloud console → see `DEPLOY.md`).
-2. **Variable** `FIREBASE_PROJECT_ID` — your Firebase project id.
+In **github.com** (a browser, not the app) → repo **Settings → Secrets and variables →
+Actions → Secrets** → add `FIREBASE_SERVICE_ACCOUNT` = the JSON key of a service account
+with the *Firebase Hosting Admin* role (create it in the Google Cloud console — see
+[`DEPLOY.md`](DEPLOY.md)).
 
 Then commit anything to the default branch → the **Actions** tab shows the deploy → live.
 
