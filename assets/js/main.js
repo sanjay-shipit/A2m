@@ -113,35 +113,58 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---------- Contact form → mailto (works without a backend) ---------- */
-  var form = doc.getElementById('contactForm');
-  var note = doc.getElementById('formNote');
-  if (form) {
-    form.addEventListener('submit', function (e) {
+  /* ---------- Booking form → WhatsApp handoff + best-effort Firestore ---------- */
+  var bform = doc.getElementById('bookingForm');
+  if (bform) {
+    var success = doc.getElementById('bookingSuccess');
+    var successName = doc.getElementById('successName');
+    var successWa = doc.getElementById('successWa');
+    var resetBtn = doc.getElementById('bookingReset');
+    var WA_NUMBER = '919667796730';
+
+    bform.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!form.checkValidity()) {
-        if (note) note.textContent = 'Please fill in your name, a valid email, and a message.';
-        form.reportValidity();
-        return;
-      }
-      var name = (doc.getElementById('cf-name').value || '').trim();
-      var email = (doc.getElementById('cf-email').value || '').trim();
-      var topic = doc.getElementById('cf-topic').value || '';
-      var msg = (doc.getElementById('cf-msg').value || '').trim();
+      if (!bform.checkValidity()) { bform.reportValidity(); return; }
 
-      var subject = 'Project enquiry: ' + topic + ' — ' + name;
-      var body =
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Topic: ' + topic + '\n\n' +
-        msg + '\n';
+      var val = function (id) { var el = doc.getElementById(id); return el ? el.value.trim() : ''; };
+      var lead = {
+        name: val('bf-name'),
+        business: val('bf-biz'),
+        phone: val('bf-phone'),
+        email: val('bf-email'),
+        service: val('bf-service'),
+        message: val('bf-msg')
+      };
 
-      var href = 'mailto:contact@sociovia.com'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(body);
+      // Save the lead to Firebase if available — never block the handoff.
+      try { if (window.AdtomateSaveLead) { window.AdtomateSaveLead(lead).catch(function () {}); } } catch (err) {}
 
-      window.location.href = href;
-      if (note) note.textContent = 'Opening your email app… if nothing happens, write to contact@sociovia.com';
+      // Compose a prefilled WhatsApp message.
+      var lines = [
+        "Hi Adtomate, I'd like to book a free consultation.", '',
+        'Name: ' + lead.name,
+        'Business: ' + (lead.business || '—'),
+        'Phone: ' + lead.phone,
+        'Email: ' + lead.email,
+        'Service: ' + lead.service
+      ];
+      if (lead.message) lines.push('Message: ' + lead.message);
+      var wa = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+
+      window.open(wa, '_blank', 'noopener');
+
+      if (successName) successName.textContent = lead.name ? ', ' + lead.name.split(' ')[0] : '';
+      if (successWa) successWa.setAttribute('href', wa);
+      bform.hidden = true;
+      if (success) success.hidden = false;
     });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        if (success) success.hidden = true;
+        bform.hidden = false;
+        bform.reset();
+      });
+    }
   }
 })();

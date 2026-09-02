@@ -72,6 +72,33 @@ Traffic appears in the Firebase console under **Analytics**. That web config is 
 public; for hygiene you can later restrict the API key in Google Cloud console →
 **APIs & Services → Credentials**.
 
+## Booking form → leads
+
+The "Book a free consultation" form needs **no backend**: on submit it opens **WhatsApp**
+to **+91 96677 96730** with the person's details prefilled, so every lead reaches you
+instantly. Nothing to set up.
+
+**Optional — also save leads in Firebase (so you have a list):**
+1. Firebase console → project `sociovia-c9473` → **Build → Firestore Database → Create
+   database** (Production mode is fine).
+2. **Rules** tab → paste this (lets the public *submit* a lead, but not read/edit others'),
+   then **Publish**:
+   ```
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{db}/documents {
+       match /leads/{id} {
+         allow create: if request.resource.data.keys().hasOnly(
+           ['name','business','phone','email','service','message',
+            'createdAt','source','page','userAgent']);
+         allow read, update, delete: if false;
+       }
+     }
+   }
+   ```
+   Leads then appear under Firestore → **leads**. (Until you do this, the form still works —
+   it just skips the save and relies on WhatsApp.)
+
 ## Troubleshooting
 
 - **Live job was skipped** → the commit wasn't on the default branch

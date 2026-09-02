@@ -1,10 +1,11 @@
-// Firebase initialization + Analytics for the Adtomate Solutions site.
+// Firebase: Analytics + Firestore lead capture for the Adtomate site.
 //
 // NOTE: these config values are the Firebase *web* config and are safe to be
 // public — they ship in client code by design (access is controlled by
 // Firebase Security Rules / API-key restrictions, not by hiding this object).
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxG0ssX3gyWByLcdm9riUcGSO3nSBtLkE",
@@ -17,11 +18,24 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// Analytics only runs in supported, browser contexts (needs cookies, https,
-// an authorized domain). Guard it so it never breaks the page elsewhere.
+// Analytics only runs in supported browser contexts; guard it.
 isSupported()
   .then((ok) => { if (ok) getAnalytics(app); })
-  .catch(() => { /* analytics unavailable — ignore */ });
+  .catch(() => {});
 
-export { app };
+// Best-effort lead capture — the booking form (in main.js) calls this if present.
+// If Firestore isn't enabled yet, the write throws and is caught by the caller;
+// the WhatsApp handoff still delivers the lead, so nothing is lost.
+window.AdtomateSaveLead = async function (lead) {
+  await addDoc(collection(db, "leads"), {
+    ...lead,
+    createdAt: serverTimestamp(),
+    source: "adtomate-website",
+    page: location.href,
+    userAgent: navigator.userAgent
+  });
+};
+
+export { app, db };
