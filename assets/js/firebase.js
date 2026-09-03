@@ -38,4 +38,17 @@ window.AdtomateSaveLead = async function (lead) {
   });
 };
 
+// Best-effort capture for the AI Transformation Assessment (assessment.js
+// calls this if present). Same never-block guarantee: WhatsApp handoff
+// still delivers the lead if this write fails or Firestore isn't ready.
+window.AdtomateSaveAssessment = async function (lead) {
+  await addDoc(collection(db, "assessment_leads"), {
+    ...lead,
+    createdAt: serverTimestamp(),
+    source: "adtomate-website-assessment",
+    page: location.href,
+    userAgent: navigator.userAgent
+  });
+};
+
 export { app, db };
