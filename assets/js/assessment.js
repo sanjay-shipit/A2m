@@ -127,7 +127,10 @@
       }
       html += '</div>';
     } else {
-      var chosen = answers[qq.id] || (qq.type === 'multi' ? [] : null);
+      // NB: use an explicit undefined check, not `|| fallback` — the first
+      // option's stored value is 0, which is falsy and would be dropped.
+      var stored = answers[qq.id];
+      var chosen = stored !== undefined ? stored : (qq.type === 'multi' ? [] : null);
       var atCap = qq.type === 'multi' && qq.max && chosen.length >= qq.max;
       if (qq.type === 'multi' && qq.max) {
         html += '<p class="quiz__cap' + (atCap ? ' is-full' : '') + '">' +
