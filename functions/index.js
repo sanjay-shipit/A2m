@@ -12,12 +12,14 @@ const logger = require("firebase-functions/logger");
 const EMAIL_API_TOKEN = defineSecret("EMAIL_API_TOKEN");
 const ALERT_TO = "sociovia.ai@gmail.com";
 const EMAIL_API_URL = "https://api.sociovia.com/api/email/send";
+const EVENTS_API_URL = "https://api.sociovia.com/api/email/events";
 
 function esc(v) {
   if (v === undefined || v === null || v === "") return "—";
   return String(v).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 }
 
+// Internal team alert — a plain email to ALERT_TO.
 async function sendAlert(token, subject, html) {
   const res = await fetch(EMAIL_API_URL, {
     method: "POST",
@@ -27,6 +29,25 @@ async function sendAlert(token, subject, html) {
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     throw new Error(`Email API responded ${res.status}: ${text}`);
+  }
+}
+
+// CRM event — pushes the lead's own contact into the events pipeline so
+// configured automations fire. `variables` values are coerced to strings
+// (the API expects string values, per the documented payload shape).
+async function sendEvent(token, eventName, email, name, variables) {
+  const vars = {};
+  for (const [k, v] of Object.entries(variables || {})) {
+    if (v !== undefined && v !== null && v !== "") vars[k] = String(v);
+  }
+  const res = await fetch(EVENTS_API_URL, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ event: eventName, email, name, variables: vars })
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`Events API responded ${res.status}: ${text}`);
   }
 }
 
@@ -44,10 +65,26 @@ exports.onLeadCreated = onDocumentCreated(
       <p><b>Message:</b> ${esc(lead.message)}</p>
       <p><b>Page:</b> ${esc(lead.page)}</p>
     `;
+    const token = EMAIL_API_TOKEN.value();
     try {
-      await sendAlert(EMAIL_API_TOKEN.value(), "Adtomate website — new lead", html);
+      await sendAlert(token, "Adtomate website — new lead", html);
     } catch (err) {
       logger.error("Failed to send lead alert email", err);
+    }
+    // Push the lead into the CRM events pipeline (uses the lead's own email).
+    if (lead.email) {
+      try {
+        await sendEvent(token, "lead_captured", lead.email, lead.name || "", {
+          business: lead.business,
+          phone: lead.phone,
+          service: lead.service,
+          message: lead.message,
+          source: lead.source,
+          page: lead.page
+        });
+      } catch (err) {
+        logger.error("Failed to send lead_captured event to CRM", err);
+      }
     }
   }
 );
@@ -69,10 +106,28 @@ exports.onAssessmentCreated = onDocumentCreated(
       <p><b>Lead tier:</b> ${esc(lead.leadTier)}</p>
       <p><b>Top opportunity areas:</b> ${esc(areas)}</p>
     `;
+    const token = EMAIL_API_TOKEN.value();
     try {
-      await sendAlert(EMAIL_API_TOKEN.value(), "Adtomate website — new assessment filled", html);
+      await sendAlert(token, "Adtomate website — new assessment filled", html);
     } catch (err) {
       logger.error("Failed to send assessment alert email", err);
+    }
+    // Push the lead into the CRM events pipeline (uses the lead's own email).
+    if (lead.email) {
+      try {
+        await sendEvent(token, "assessment_completed", lead.email, lead.name || "", {
+          company: lead.company,
+          role: lead.role,
+          phone: lead.phone,
+          website: lead.website,
+          overall_score: lead.overallScore,
+          profile: lead.profile,
+          lead_tier: lead.leadTier,
+          opportunity_areas: areas
+        });
+      } catch (err) {
+        logger.error("Failed to send assessment_completed event to CRM", err);
+      }
     }
   }
 );
