@@ -49,6 +49,16 @@ async function sendEvent(token, eventName, email, name, variables) {
     const text = await res.text().catch(() => "");
     throw new Error(`Events API responded ${res.status}: ${text}`);
   }
+  // The API returns 200 success:true even for unknown events — the real
+  // outcome is in the body. Surface it so a misconfigured event name can't
+  // silently enroll 0 automations again.
+  const body = await res.json().catch(() => null);
+  if (body && body.data) {
+    if (Array.isArray(body.data.errors) && body.data.errors.length) {
+      throw new Error(`Events API rejected "${eventName}": ${body.data.errors.join(", ")}`);
+    }
+    logger.info(`Event "${eventName}" enrolled ${body.data.enrolled_automations} automation(s)`);
+  }
 }
 
 exports.onLeadCreated = onDocumentCreated(
@@ -74,7 +84,8 @@ exports.onLeadCreated = onDocumentCreated(
     // Push the lead into the CRM events pipeline (uses the lead's own email).
     if (lead.email) {
       try {
-        await sendEvent(token, "lead_captured", lead.email, lead.name || "", {
+        await sendEvent(token, "lead", lead.email, lead.name || "", {
+          type: "booking",
           business: lead.business,
           phone: lead.phone,
           service: lead.service,
@@ -83,7 +94,7 @@ exports.onLeadCreated = onDocumentCreated(
           page: lead.page
         });
       } catch (err) {
-        logger.error("Failed to send lead_captured event to CRM", err);
+        logger.error("Failed to send lead event to CRM", err);
       }
     }
   }
@@ -115,7 +126,8 @@ exports.onAssessmentCreated = onDocumentCreated(
     // Push the lead into the CRM events pipeline (uses the lead's own email).
     if (lead.email) {
       try {
-        await sendEvent(token, "assessment_completed", lead.email, lead.name || "", {
+        await sendEvent(token, "lead", lead.email, lead.name || "", {
+          type: "assessment",
           company: lead.company,
           role: lead.role,
           phone: lead.phone,
@@ -126,7 +138,7 @@ exports.onAssessmentCreated = onDocumentCreated(
           opportunity_areas: areas
         });
       } catch (err) {
-        logger.error("Failed to send assessment_completed event to CRM", err);
+        logger.error("Failed to send lead event to CRM", err);
       }
     }
   }
