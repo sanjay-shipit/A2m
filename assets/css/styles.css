@@ -701,8 +701,17 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 }
 .quiz__scale-opt.is-active .quiz__scale-num { background: var(--blue); border-color: var(--blue); color: #fff; }
 
-.quiz__nav { display: flex; justify-content: space-between; margin-top: 28px; }
+.quiz__nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; }
 .quiz__nav .btn--ghost:disabled { opacity: .4; pointer-events: none; }
+
+/* Long-text CTAs inside the quiz must wrap and stay within the card
+   (the global .btn is white-space:nowrap, which overflowed on mobile). */
+#quizShowLeadForm,
+.result__cta .btn,
+.quiz__leadform .btn,
+.quiz__success .btn {
+  width: 100%; white-space: normal; text-align: center; line-height: 1.3;
+}
 
 .result__head { text-align: left; margin-bottom: 26px; }
 .result__score { display: flex; align-items: baseline; gap: 4px; margin: 8px 0 10px; }
@@ -783,6 +792,10 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .shift-list li { flex-wrap: wrap; }
   .shift-list li span { text-align: left; flex-basis: 100%; }
   .quiz__intro-grid { grid-template-columns: repeat(2, 1fr); }
+  .quiz { padding: 24px 18px; }
+  .quiz__q { font-size: 1.15rem; }
+  .result__score-num { font-size: 2.6rem; }
+  .result__cta h3 { font-size: 1.1rem; }
 }
 
 /* ---------- Reduced motion ---------- */
