@@ -128,9 +128,17 @@
       html += '</div>';
     } else {
       var chosen = answers[qq.id] || (qq.type === 'multi' ? [] : null);
+      var atCap = qq.type === 'multi' && qq.max && chosen.length >= qq.max;
+      if (qq.type === 'multi' && qq.max) {
+        html += '<p class="quiz__cap' + (atCap ? ' is-full' : '') + '">' +
+          chosen.length + ' of ' + qq.max + ' selected' +
+          (atCap ? ' — deselect one to change' : '') + '</p>';
+      }
       for (var i = 0; i < qq.options.length; i++) {
         var isActive = qq.type === 'multi' ? chosen.indexOf(i) !== -1 : chosen === i;
-        html += '<button type="button" class="quiz__opt' + (isActive ? ' is-active' : '') + '" data-val="' + i + '">' +
+        var isDisabled = atCap && !isActive;
+        html += '<button type="button" class="quiz__opt' + (isActive ? ' is-active' : '') +
+          (isDisabled ? ' is-disabled' : '') + '" data-val="' + i + '">' +
           '<span class="quiz__opt-check" aria-hidden="true"></span>' + qq.options[i] + '</button>';
       }
     }
