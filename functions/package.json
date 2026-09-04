@@ -1,0 +1,11 @@
+{
+  "name": "adtomate-functions",
+  "description": "Server-side alert emails for new Adtomate leads — keeps the email API token out of client-side code.",
+  "private": true,
+  "engines": { "node": "20" },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  }
+}
